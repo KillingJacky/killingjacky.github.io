@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Source Sans Pro:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tech,SyncY,NAS,docker,百度云,群晖," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1 安装Docker套件套件中心安装，略。">
+<meta name="keywords" content="tech,SyncY,NAS,docker,百度云,群晖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SyncY in Synology NAS | 在群晖中使用SyncY同步百度云">
+<meta property="og:url" content="http://forkthings.com/2016/11/25/syncy-in-synology-nas/index.html">
+<meta property="og:site_name" content="Fork Things">
+<meta property="og:description" content="1 安装Docker套件套件中心安装，略。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420772/cdf8802e-ad9a-11e6-833a-ed58e86529f7.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420815/0b45df8a-ad9b-11e6-8927-034c8e9207c6.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420852/3dddfed2-ad9b-11e6-8c79-397335d6bb78.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420885/6e9a9756-ad9b-11e6-9f0b-b1d629b22724.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420940/cc71b7b0-ad9b-11e6-8a98-b64234eeaa04.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420553/83f50e8a-ad99-11e6-9fd1-6239d201a294.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20420975/12078746-ad9c-11e6-805c-3f734fff22db.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/5130185/20421007/383c7cbe-ad9c-11e6-97d7-4574f31deb55.png">
+<meta property="og:updated_time" content="2018-02-03T10:41:13.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SyncY in Synology NAS | 在群晖中使用SyncY同步百度云">
+<meta name="twitter:description" content="1 安装Docker套件套件中心安装，略。">
+<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/5130185/20420772/cdf8802e-ad9a-11e6-833a-ed58e86529f7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://forkthings.com/2016/11/25/syncy-in-synology-nas/"/>
+
+
+
+
+
+  <title>SyncY in Synology NAS | 在群晖中使用SyncY同步百度云 | Fork Things</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-46589105-7', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fork Things</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Fork the connectivity of every physical things in the world.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://forkthings.com/2016/11/25/syncy-in-synology-nas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="KillingJacky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fork Things">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SyncY in Synology NAS | 在群晖中使用SyncY同步百度云</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-25T21:12:38+00:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/11/25/syncy-in-synology-nas/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/11/25/syncy-in-synology-nas/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-安装Docker套件"><a href="#1-安装Docker套件" class="headerlink" title="1 安装Docker套件"></a>1 安装Docker套件</h2><p>套件中心安装，略。</p>
+<a id="more"></a>
+<h2 id="2-下载syncy镜像"><a href="#2-下载syncy镜像" class="headerlink" title="2 下载syncy镜像"></a>2 下载syncy镜像</h2><p>找开Docker套件，注册表中搜索syncy，得到结果 chiunownow/syncy ，双击下载。如果报错，请转入命令行下载，ssh登入后运行</p>
+<p><code>docker pull chiunownow/syncy</code></p>
+<p>网速慢的得等待一会儿了（其实是很久很久很久。。。）</p>
+<p>什么？不知道怎么登入ssh？请看下一步</p>
+<h2 id="3-使能ssh并登入"><a href="#3-使能ssh并登入" class="headerlink" title="3 使能ssh并登入"></a>3 使能ssh并登入</h2><p>控制面板 -&gt; 终端机和SNMP -&gt; 勾选启动SSH功能</p>
+<p>使用自己熟悉的终端登入ssh（比如windows下的putty，mac/linux下的terminal，太基础不会的自己度娘谷狗吧）</p>
+<p><code>ssh root@your-nas-address</code></p>
+<p>密码为初建管理员密码。</p>
+<h2 id="4-Syncy配置"><a href="#4-Syncy配置" class="headerlink" title="4 Syncy配置"></a>4 Syncy配置</h2><p>以下都是在ssh中。</p>
+<p><code>docker run --name sss -it chiunownow/syncy /bin/bash</code></p>
+<p>现在进入了容器命令行，运行</p>
+<p><code>/usr/bin/syncy.py</code></p>
+<p>会得到这样的打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Device binding Guide:</span><br><span class="line">     1. Open web browser to visit:&quot;https://openapi.baidu.com/device&quot; and input user code to binding your baidu account.</span><br><span class="line"></span><br><span class="line">     2. User code: xxxxxx</span><br><span class="line">     (User code valid for 30 minutes.)</span><br><span class="line"></span><br><span class="line">     3. After granting access to the application, come back here and press [Enter] to continue.</span><br></pre></td></tr></table></figure>
+<p>一通复制粘贴点击下一步。。。。。最后ctrl+C结束。</p>
+<p>这时完成的事情是拿到了百度云的token，同时写入了配置文件/etc/config/syncy</p>
+<p>我们要把这个配置文件搞出来</p>
+<p><code>cat /etc/config/syncy</code></p>
+<p>复制。然后退出docker</p>
+<p><code>exit</code></p>
+<p>在DSM系统中找一个位置存放配置文件，</p>
+<p><code>mkdir -p /volume1/docker/syncy</code></p>
+<p><code>cd /volume1/docker/syncy</code></p>
+<p><code>cat &gt; syncy-photo</code></p>
+<p>粘贴，ctrl+d保存。</p>
+<p>这个默认的配置会把文件同步到百度云的“我的应用数据/SyncY/Syncy-docker目录下，如果想同步到另外的目录，或SyncY多开，可以找到<code>option remotepath &#39;/Syncy-docker&#39;</code>修改成想要的目录名。</p>
+<p>最后删除临时容器</p>
+<p><code>docker rm sss</code></p>
+<p>告别命令行回到DSM的图形界面。</p>
+<h2 id="5-创建Syncy容器"><a href="#5-创建Syncy容器" class="headerlink" title="5 创建Syncy容器"></a>5 创建Syncy容器</h2><p>打开Docker套件，在”映像“中选择”chiunownow/syncy“，”启动”，”通过向导启动”</p>
+<p>容器名称</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420772/cdf8802e-ad9a-11e6-833a-ed58e86529f7.png" alt="image"></p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420815/0b45df8a-ad9b-11e6-8927-034c8e9207c6.png" alt="image"></p>
+<p>下一步，高级设置，卷，添加文件</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420852/3dddfed2-ad9b-11e6-8c79-397335d6bb78.png" alt="image"></p>
+<p>添加文件夹</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420885/6e9a9756-ad9b-11e6-9f0b-b1d629b22724.png" alt="image"></p>
+<p>注意红框内的装载路径<strong>必须</strong>这样填</p>
+<p>FIX: /etc/config/syncy 只读属性去掉</p>
+<p>“环境”，执行命令，sh /usr/bin/syncyd.sh</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420940/cc71b7b0-ad9b-11e6-8a98-b64234eeaa04.png" alt="image"></p>
+<p>最后是这样子的</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420553/83f50e8a-ad99-11e6-9fd1-6239d201a294.png" alt="image"></p>
+<p>启动容器</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20420975/12078746-ad9c-11e6-805c-3f734fff22db.png" alt="image"></p>
+<p>成功运行</p>
+<p><img src="https://cloud.githubusercontent.com/assets/5130185/20421007/383c7cbe-ad9c-11e6-97d7-4574f31deb55.png" alt="image"></p>
+<p>！！注意！！<br>默认的配置是1小时同步一次，这种慢扫适合同步照片等不紧急备份任务，或文件数量巨大的目录(云与本地目录的比对成本很高)，想要立即同步，可重启容器。</p>
+<p>可自行修改配置文件中的syncinterval提高同步扫描频率，比如从百度云推送文件回NAS，可设1分钟或更小，但切记文件数不要太多，这种快扫会消耗较多的CPU资源。</p>
+<p>另外，syncy原作者针对配置项写了详尽文档，<a href="http://www.syncy.cn/index.php/syncyconfighelp/" target="_blank" rel="noopener">http://www.syncy.cn/index.php/syncyconfighelp/</a> ， 懂的自己折腾吧</p>
+<h2 id="6-多开-同步多个目录"><a href="#6-多开-同步多个目录" class="headerlink" title="6 多开/同步多个目录"></a>6 多开/同步多个目录</h2><p>重复4，5步 😎</p>
+<h2 id="配置项解释"><a href="#配置项解释" class="headerlink" title="配置项解释"></a>配置项解释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">#  synctype:[0-4]</span><br><span class="line">#    [0,upload]:只检查本地文件并上传修改过的文件，忽略远端的所有修改或删除，远端删除的也不再上传</span><br><span class="line">#    [1,upload+]:远端是本地的完全镜像，忽略远端的修改，远端删除的文件在下一次同步时将上传，远端新增的文件如果本地不存在，将不做任何变化</span><br><span class="line">#    [2,download]:只检查远端文件是否修改，如有修改下载到本地，忽略本地的修改；如本地文件被删除，将不再下载</span><br><span class="line">#    [3,download+]:检查远端和本地文件，如远端有修改，下载到本地，忽略本地的修改；如本地有文件被删除，将重新下载</span><br><span class="line">#    [4,sync]:同时检查远端和本地文件，如只有远端被修改，则下载到本地；如只有本地修改，则上传到远端；如本地和远端都被修改，则以冲突设置方式为准。</span><br><span class="line">#    0-3模式下，目的端自主新增的文件不会被删除</span><br><span class="line">#   4模式下，当远端目录更改后，请删除本地同步根目录下的.syncy.info.db文件，否则在下次同步时将会删除本地的所有文件（系统会认为远程文件不需要被用户删除，也会删除本地的相应文件）</span><br><span class="line"></span><br><span class="line">syncyerrlog=”</span><br><span class="line">#  错误日志文件（包含路径名），为空时将输出至错误输出（默认屏幕）</span><br><span class="line"># 设置值必须是指向文件，文件可以不存在（不存在时程序自动创建），父目录必须存在，不能指向已存在的目录</span><br><span class="line"># 例：/mnt/sda1/log/syncyerr.log</span><br><span class="line"></span><br><span class="line">syncylog=”</span><br><span class="line">#  运行日志文件（包含路径名），为空时将输出至标准输出（默认屏幕）</span><br><span class="line"># 设置值必须是指向文件，文件可以不存在（不存在时程序自动创建），父目录必须存在，不能指向已存在的目录</span><br><span class="line"># 例：/mnt/sda1/log/syncy.log</span><br><span class="line"></span><br><span class="line">blocksize=’10’</span><br><span class="line"># 分片上传块大小</span><br><span class="line">#  默认值为 10 (10M)</span><br><span class="line">#  单位 M，此大小决定了能上传的最大文件大小（文件最大大小 = blocksize * 1024）</span><br><span class="line">#  分片大小必须大于等于1（1M）</span><br><span class="line"></span><br><span class="line">ondup=’rename’</span><br><span class="line"># 重名处理方式</span><br><span class="line">#  默认值为 ‘rename’</span><br><span class="line">#  [rename or overwrite]</span><br><span class="line">#  存在重名文件时是覆盖同名文件，还是重命名文件</span><br><span class="line">#  当同步模式为0，重命名新文件，命名规则为“文件名_日期.后缀”</span><br><span class="line">#  同步模式为1和2时，将重命名旧文件，命名规则为“文件名_old_日期.后缀”</span><br><span class="line">#  同步模式为3时，则ondup只能为overwrite，设置成rename将不生效</span><br><span class="line"></span><br><span class="line">datacache=’on’</span><br><span class="line"># 是否开启缓存</span><br><span class="line"># 默认值为 ‘on’</span><br><span class="line"># 同步信息数据缓存，启用有助于提高同步速度</span><br><span class="line"># 请根据你路由内存的大小来决定是否开启</span><br><span class="line"></span><br><span class="line">excludefiles=’*/Thumbs.db’</span><br><span class="line"># 排除文件或文件夹，将会同时应用于本地和远端，请合理设置此值，过多的排除选项将会降低系统的处理速度</span><br><span class="line"># 有多个排除项时用分号(;)隔开</span><br><span class="line"># 例：’*/Thumbs.db;*/excludefilename.*’</span><br><span class="line"># 默认排除以“.tmp.syy”结尾的文件，此类型文件用于记录分片上传或断点下载信息，上传或下载完成后将自动删除，如原文件被手动修改，建议同时删除此文件</span><br><span class="line"># 只支持通配符*? (*代表零个或更多个任意字符，?代表零个或一个字符)</span><br><span class="line"></span><br><span class="line">listnumber=’100′</span><br><span class="line"># 每次检查获取远程的文件数</span><br><span class="line"># 默认值为 100</span><br><span class="line"># 同步时每次获取的远端文件列表数量，数量过大时返回的字符串长度很大，将占用更多的内存</span><br><span class="line"># 路径长度较长时也应适当缩小此值</span><br><span class="line"></span><br><span class="line">retrytimes=’3′</span><br><span class="line">#失败重试次数（发生错误时的重试次数）</span><br><span class="line"># 默认值 3 次</span><br><span class="line"></span><br><span class="line">retrydelay=’3′</span><br><span class="line"># 重试延时时间（秒）</span><br><span class="line"># 默认值为 3 秒</span><br><span class="line"></span><br><span class="line">maxsendspeed=’0′</span><br><span class="line"># 最大上传速度（字节/秒）</span><br><span class="line"># 默认值为 0(不限速)</span><br><span class="line"></span><br><span class="line">maxrecvspeed=’0′</span><br><span class="line"># 最大下载速度（字节/秒）</span><br><span class="line"># 默认值为 0(不限速)</span><br><span class="line"></span><br><span class="line">syncperiod=’0-24′</span><br><span class="line"># 运行时间段</span><br><span class="line"># 默认值为 ‘0-24′</span><br><span class="line"># 运行时间段（小时）</span><br><span class="line"># 判断规则为[0,24)即包含设定的开始时间截止于设定的结束时间</span><br><span class="line"># 如想从零点至6点之间才允许运行，应设置为’0-6’，如24小时都运行，则设置为’0-24’</span><br><span class="line"># 如果当前时间不在设定范围内，将每5分钟检查一次，如果设为空，则只运行一次后退出</span><br><span class="line"></span><br><span class="line">syncinterval=’3600′</span><br><span class="line"># 同步间隔时间</span><br><span class="line"># 默认值为 3600(1小时)</span><br><span class="line"># 每次同步完成之后与下一次开始同步的间隔时间</span><br><span class="line"># 单位：秒</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tech/" rel="tag"># tech</a>
+          
+            <a href="/tags/SyncY/" rel="tag"># SyncY</a>
+          
+            <a href="/tags/NAS/" rel="tag"># NAS</a>
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/百度云/" rel="tag"># 百度云</a>
+          
+            <a href="/tags/群晖/" rel="tag"># 群晖</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/25/slack-thunder/" rel="next" title="Use Slack App to Issue Thunder Remote Download Task">
+                <i class="fa fa-chevron-left"></i> Use Slack App to Issue Thunder Remote Download Task
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/25/diy-an-irobot-roomba-virtual-wall/" rel="prev" title="DIY an iRobot Roomba Compatible Virtual Wall">
+                DIY an iRobot Roomba Compatible Virtual Wall <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">KillingJacky</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/KillingJacky" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/KillingJacky" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装Docker套件"><span class="nav-number">1.</span> <span class="nav-text">1 安装Docker套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载syncy镜像"><span class="nav-number">2.</span> <span class="nav-text">2 下载syncy镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使能ssh并登入"><span class="nav-number">3.</span> <span class="nav-text">3 使能ssh并登入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Syncy配置"><span class="nav-number">4.</span> <span class="nav-text">4 Syncy配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-创建Syncy容器"><span class="nav-number">5.</span> <span class="nav-text">5 创建Syncy容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-多开-同步多个目录"><span class="nav-number">6.</span> <span class="nav-text">6 多开/同步多个目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置项解释"><span class="nav-number">7.</span> <span class="nav-text">配置项解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">KillingJacky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://forkthings.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://forkthings.com/2016/11/25/syncy-in-synology-nas/';
+          this.page.identifier = '2016/11/25/syncy-in-synology-nas/';
+          this.page.title = 'SyncY in Synology NAS | 在群晖中使用SyncY同步百度云';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://forkthings.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
